@@ -98,11 +98,14 @@ function playFromBeginning () {
 
 function nextQuestion() {
 	if ((numCorrect + numIncorrect + numTimeOut) === 8) {
+		//Play fun audio clip
+		var audio = new Audio('assets/images/gameOver.mp3');
+		audio.play();
 		//End-game status report
 		$("#answersArea").html("Total correct: " + numCorrect + "<br>");
 		$("#answersArea").append("Total incorrect: " + numIncorrect + "<br>");
 		$("#answersArea").append("Total time outs: " + numTimeOut + "<br>");
-		$("#answersArea").append("Press the retart button to play again!");
+		$("#answersArea").append("Press the retart button to play again!<br><br>");
 		$("#answersArea").append('<button onclick="playFromBeginning()" type="button" class="btn btn-default" id="restart">Restart</button>');		
 	}
 	else {
@@ -115,10 +118,10 @@ function nextQuestion() {
 		//Display next question in message area
 		$("#messageArea").html(currentQuestion.question);
 		//Display that question's answers in answers area
-		$("#answersArea").html('<button onclick="isCorrect(1)" type="button" class="btn btn-default" id="1">' + currentQuestion.answer1 + '</button>');
-		$("#answersArea").append('<button onclick="isCorrect(2)" type="button" class="btn btn-default" id="2">' + currentQuestion.answer2 + '</button>');
-		$("#answersArea").append('<button onclick="isCorrect(3)" type="button" class="btn btn-default" id="3">' + currentQuestion.answer3 + '</button>');
-		$("#answersArea").append('<button onclick="isCorrect(4)" type="button" class="btn btn-default" id="4">' + currentQuestion.answer4 + '</button>');
+		$("#answersArea").html('<button onclick="isCorrect(1)" type="button" class="btn btn-default" id="1">' + currentQuestion.answer1 + '</button><br><br>');
+		$("#answersArea").append('<button onclick="isCorrect(2)" type="button" class="btn btn-default" id="2">' + currentQuestion.answer2 + '</button><br><br>');
+		$("#answersArea").append('<button onclick="isCorrect(3)" type="button" class="btn btn-default" id="3">' + currentQuestion.answer3 + '</button><br><br>');
+		$("#answersArea").append('<button onclick="isCorrect(4)" type="button" class="btn btn-default" id="4">' + currentQuestion.answer4 + '</button><br><br>');
 		//Give user 30 seconds to answer question
 		counterInterval = setInterval(decrementTimer, 1000)
 		counterTimeout = setTimeout(timesUp, 30000);
@@ -157,7 +160,7 @@ function isCorrect(number) {
 	//Clear timer
 	clearTimeout(counterTimeout)
 	//Display gif in answers area with a caption (and do anything else that's fun)
-	$("#answersArea").html('<img src= "'+ currentQuestion.gif + '" height=200px width=300px>');
+	$("#answersArea").html('<img src= "'+ currentQuestion.gif + '" height=200px width=300px><br><br>');
 	caption();
 	//Wait 5 seconds, then move on to the next question
 	setTimeout(nextQuestion, 4000);
@@ -169,14 +172,14 @@ function timesUp() {
 	//Increment time outs
 	numTimeOut++;
 	//Play fun audio clip
-	var audio = new Audio('assets/images/incorrect.mp3');
+	var audio = new Audio('assets/images/incorrect.mp3<br>');
 	audio.play();
 	//Clear interval
 	clearInterval(counterInterval);
 	//Clear timer
 	clearTimeout(counterTimeout)
 	//Display gif in answers area with a caption (and do anything else that's fun)
-	$("#answersArea").html('<img src= "'+ currentQuestion.gif + '">');
+	$("#answersArea").html('<img src= "'+ currentQuestion.gif + '"><br><br>');
 	caption();
 	//Wait 5 seconds, then move on to the next question
 	setTimeout(nextQuestion, 4000);
