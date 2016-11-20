@@ -1,0 +1,9 @@
+*Make a START button and a RESTART button (this might fix the first Q problem?)
+
+*If the start button doesn't fix it, figure out why the first question isn't loading
+
+*Make the answer buttons stack vertically and look nice
+
+*Caption the GIFs and make them all the same size
+
+*Style the page to be more sci-fi-y

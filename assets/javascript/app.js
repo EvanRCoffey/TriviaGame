@@ -11,7 +11,7 @@ var Question1 = {
 	answer1 : "Jay Queue",
 	answer2 : "Ruby Rhod",
 	answer3 : "Dirk Diggler",
-	answer4 : "Chet Brockwell",
+	answer4 : "Chest Rockwell",
 	correctAnswer : 2,
 	gif : "assets/images/rubyRhod.gif"
 }
@@ -88,6 +88,8 @@ var Question8 = {
 
 var questions = [Question1, Question2, Question3, Question4, Question5, Question6, Question7, Question8]
 
+
+
 function playFromBeginning () {
 	nextQuestion()
 }
@@ -133,6 +135,9 @@ function isCorrect(number) {
 		$("#messageArea").html("Correct!");
 		//Increment correct answers
 		numCorrect++;
+		//Play fun audio clip
+		var audio = new Audio('assets/images/correct.mp3');
+		audio.play();
 	}
 	//If the answer is incorrect...
 	else {
@@ -140,13 +145,16 @@ function isCorrect(number) {
 		$("#messageArea").html("Incorrect!");
 		//Increment incorrect answers
 		numIncorrect++;
+		//Play fun audio clip
+		var audio = new Audio('assets/images/incorrect.mp3');
+		audio.play();
 	}
 	//Clear interval
 	clearInterval(counterInterval);
 	//Clear timer
 	clearTimeout(counterTimeout)
 	//Display gif in answers area with a caption (and do anything else that's fun)
-	$("#answersArea").html('<img src= "'+ currentQuestion.gif + '">')
+	$("#answersArea").html('<img src= "'+ currentQuestion.gif + '">');
 	//Wait 5 seconds, then move on to the next question
 	setTimeout(nextQuestion, 5000);
 }
@@ -156,15 +164,17 @@ function timesUp() {
 	$("#messageArea").html("Time's up!");
 	//Increment time outs
 	numTimeOut++;
+	//Play fun audio clip
+	var audio = new Audio('assets/images/incorrect.mp3');
+	audio.play();
 	//Clear interval
 	clearInterval(counterInterval);
 	//Clear timer
 	clearTimeout(counterTimeout)
 	//Display gif in answers area with a caption (and do anything else that's fun)
-	$("#answersArea").html('<img src= "'+ currentQuestion.gif + '">')
+	$("#answersArea").html('<img src= "'+ currentQuestion.gif + '">');
 	//Wait 5 seconds, then move on to the next question
 	setTimeout(nextQuestion, 5000);
 }
 
-//Run the trivia game!
-playFromBeginning();
+$(document).ready(playFromBeginning())
