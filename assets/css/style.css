@@ -29,6 +29,10 @@
 	height: 41%;
 }
 
+#nextQ {
+	margin-left: 20px;
+}
+
 body {
 	background-color: black;
 	text-align: center;

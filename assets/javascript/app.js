@@ -102,6 +102,7 @@ function nextQuestion() {
 		var audio = new Audio('assets/images/gameOver.mp3');
 		audio.play();
 		//End-game status report
+		$("#messageArea").html("That's it, man!  Game over, man!  Game over!")
 		$("#answersArea").html("Total correct: " + numCorrect + "<br>");
 		$("#answersArea").append("Total incorrect: " + numIncorrect + "<br>");
 		$("#answersArea").append("Total time outs: " + numTimeOut + "<br>");
@@ -162,8 +163,8 @@ function isCorrect(number) {
 	//Display gif in answers area with a caption (and do anything else that's fun)
 	$("#answersArea").html('<img src= "'+ currentQuestion.gif + '" height=200px width=300px><br><br>');
 	caption();
-	//Wait 5 seconds, then move on to the next question
-	setTimeout(nextQuestion, 4000);
+	//User clicks a button to see the next question
+	$("#answersArea").append('<button onclick="nextQuestion()" type="button" class="btn btn-default" id="nextQ">Continue</button>');
 }
 
 function timesUp() {
@@ -181,13 +182,13 @@ function timesUp() {
 	//Display gif in answers area with a caption (and do anything else that's fun)
 	$("#answersArea").html('<img src= "'+ currentQuestion.gif + '" height=200px width=300px><br><br>');
 	caption();
-	//Wait 5 seconds, then move on to the next question
-	setTimeout(nextQuestion, 4000);
+	//User clicks a button to see the next question
+	$("#answersArea").append('<button onclick="nextQuestion()" type="button" class="btn btn-default" id="nextQ">Continue</button>');
 }
 
 function caption() {
-	if (currentQuestion.correctAnswer === 1) {$("#answersArea").append('Correct answer: ' + currentQuestion.answer1)}
-	if (currentQuestion.correctAnswer === 2) {$("#answersArea").append('Correct answer: ' + currentQuestion.answer2)}
-	if (currentQuestion.correctAnswer === 3) {$("#answersArea").append('Correct answer: ' + currentQuestion.answer3)}
-	if (currentQuestion.correctAnswer === 4) {$("#answersArea").append('Correct answer: ' + currentQuestion.answer4)}
+	if (currentQuestion.correctAnswer === 1) {$("#answersArea").append('Correct answer: ' + currentQuestion.answer1) + '<br><br>'}
+	if (currentQuestion.correctAnswer === 2) {$("#answersArea").append('Correct answer: ' + currentQuestion.answer2) + '<br><br>'}
+	if (currentQuestion.correctAnswer === 3) {$("#answersArea").append('Correct answer: ' + currentQuestion.answer3) + '<br><br>'}
+	if (currentQuestion.correctAnswer === 4) {$("#answersArea").append('Correct answer: ' + currentQuestion.answer4) + '<br><br>'}
 }
