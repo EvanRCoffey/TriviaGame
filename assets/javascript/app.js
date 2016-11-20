@@ -78,7 +78,7 @@ var Question7 = {
 
 var Question8 = {
 	question : 'What was Matthew Mcconaugheys occupation before he agreed to help save the world in "Interstellar"?',
-	answer1 : "Farmer",
+	answer1 : "Police officer",
 	answer2 : "Pilot",
 	answer3 : "Web developer",
 	answer4 : "Preschool teacher",
@@ -88,19 +88,22 @@ var Question8 = {
 
 var questions = [Question1, Question2, Question3, Question4, Question5, Question6, Question7, Question8]
 
-
-
 function playFromBeginning () {
+	numCorrect = 0;
+	numIncorrect = 0;
+	numTimeOut = 0;
+	currentQuestion = {};
 	nextQuestion()
 }
 
 function nextQuestion() {
 	if ((numCorrect + numIncorrect + numTimeOut) === 8) {
 		//End-game status report
-		$("#messageArea").html("Total correct: " + numCorrect + "<br>");
-		$("#messageArea").append("Total incorrect: " + numIncorrect + "<br>");
-		$("#messageArea").append("Total time outs: " + numTimeOut + "<br>");
-		$("#messageArea").append("Thanks for playing!");
+		$("#answersArea").html("Total correct: " + numCorrect + "<br>");
+		$("#answersArea").append("Total incorrect: " + numIncorrect + "<br>");
+		$("#answersArea").append("Total time outs: " + numTimeOut + "<br>");
+		$("#answersArea").append("Press the retart button to play again!");
+		$("#answersArea").append('<button onclick="playFromBeginning()" type="button" class="btn btn-default" id="restart">Restart</button>');		
 	}
 	else {
 		//Set timer to 30 seconds
@@ -112,10 +115,10 @@ function nextQuestion() {
 		//Display next question in message area
 		$("#messageArea").html(currentQuestion.question);
 		//Display that question's answers in answers area
-		$("#answersArea").html('<button onclick="isCorrect(1)" type="button" class="btn btn-default"> id="1"' + currentQuestion.answer1 + '</button>');
-		$("#answersArea").append('<button onclick="isCorrect(2)" type="button" class="btn btn-default"> id="2"' + currentQuestion.answer2 + '</button>');
-		$("#answersArea").append('<button onclick="isCorrect(3)" type="button" class="btn btn-default"> id="3"' + currentQuestion.answer3 + '</button>');
-		$("#answersArea").append('<button onclick="isCorrect(4)" type="button" class="btn btn-default"> id="4"' + currentQuestion.answer4 + '</button>');
+		$("#answersArea").html('<button onclick="isCorrect(1)" type="button" class="btn btn-default" id="1">' + currentQuestion.answer1 + '</button>');
+		$("#answersArea").append('<button onclick="isCorrect(2)" type="button" class="btn btn-default" id="2">' + currentQuestion.answer2 + '</button>');
+		$("#answersArea").append('<button onclick="isCorrect(3)" type="button" class="btn btn-default" id="3">' + currentQuestion.answer3 + '</button>');
+		$("#answersArea").append('<button onclick="isCorrect(4)" type="button" class="btn btn-default" id="4">' + currentQuestion.answer4 + '</button>');
 		//Give user 30 seconds to answer question
 		counterInterval = setInterval(decrementTimer, 1000)
 		counterTimeout = setTimeout(timesUp, 30000);
@@ -154,9 +157,10 @@ function isCorrect(number) {
 	//Clear timer
 	clearTimeout(counterTimeout)
 	//Display gif in answers area with a caption (and do anything else that's fun)
-	$("#answersArea").html('<img src= "'+ currentQuestion.gif + '">');
+	$("#answersArea").html('<img src= "'+ currentQuestion.gif + '" height=200px width=300px>');
+	caption();
 	//Wait 5 seconds, then move on to the next question
-	setTimeout(nextQuestion, 5000);
+	setTimeout(nextQuestion, 4000);
 }
 
 function timesUp() {
@@ -173,8 +177,14 @@ function timesUp() {
 	clearTimeout(counterTimeout)
 	//Display gif in answers area with a caption (and do anything else that's fun)
 	$("#answersArea").html('<img src= "'+ currentQuestion.gif + '">');
+	caption();
 	//Wait 5 seconds, then move on to the next question
-	setTimeout(nextQuestion, 5000);
+	setTimeout(nextQuestion, 4000);
 }
 
-$(document).ready(playFromBeginning())
+function caption() {
+	if (currentQuestion.correctAnswer === 1) {$("#answersArea").append('Correct answer: ' + currentQuestion.answer1)}
+	if (currentQuestion.correctAnswer === 2) {$("#answersArea").append('Correct answer: ' + currentQuestion.answer2)}
+	if (currentQuestion.correctAnswer === 3) {$("#answersArea").append('Correct answer: ' + currentQuestion.answer3)}
+	if (currentQuestion.correctAnswer === 4) {$("#answersArea").append('Correct answer: ' + currentQuestion.answer4)}
+}
