@@ -172,14 +172,14 @@ function timesUp() {
 	//Increment time outs
 	numTimeOut++;
 	//Play fun audio clip
-	var audio = new Audio('assets/images/incorrect.mp3<br>');
+	var audio = new Audio('assets/images/incorrect.mp3');
 	audio.play();
 	//Clear interval
 	clearInterval(counterInterval);
 	//Clear timer
 	clearTimeout(counterTimeout)
 	//Display gif in answers area with a caption (and do anything else that's fun)
-	$("#answersArea").html('<img src= "'+ currentQuestion.gif + '"><br><br>');
+	$("#answersArea").html('<img src= "'+ currentQuestion.gif + '" height=200px width=300px><br><br>');
 	caption();
 	//Wait 5 seconds, then move on to the next question
 	setTimeout(nextQuestion, 4000);
